@@ -1,6 +1,14 @@
 import mongoose from "mongoose"
 
 const userSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -15,15 +23,13 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: "customer"
     },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
     address: {
+        street: String,
+        city: String,
+        postalCode: String,
+        country: String
+    },
+    dateOfBirth: {
         type: String,
         required: true
     },
@@ -33,7 +39,7 @@ const userSchema = new mongoose.Schema({
     },
     profilePicture: {
         type: String,
-        required: true,
+        // required: true,
         default: "https://www.vecteezy.com/free-vector/default-profile-picture"
     }
 })

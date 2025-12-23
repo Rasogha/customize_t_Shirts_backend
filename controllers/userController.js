@@ -69,3 +69,14 @@ export function isItCustomer(req){
     }
     return isCustomer
 }
+
+export function isItPrintManager(req){
+    let isPrintManager = false
+
+    if(req.user != null ){
+        if(req.user.role == "print_manager"){
+            isPrintManager = true
+        }   
+        return isPrintManager
+    }
+}
