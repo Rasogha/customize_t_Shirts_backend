@@ -49,22 +49,50 @@ export async function getAllProducts(req, res) {
     }
 }
 
+export async function getProductById(req, res) {
+
+    try{
+        const {id} = req.params
+        const product = await Product.findById(id)
+
+        if(product){
+            res.json(product)
+        }else{
+            res.status(404).json({message: "Product not found"})
+        }
+    }catch(error){
+        res.status(500).json({message: "Failed to connect"})
+    }
+}
+
 export async function updateProduct(req, res) {
     let isAdmin = isItAdmin(req)
     try{
         if(isAdmin){
-            const key = req.params.key
+            const {id} = req.params
             const data = req.body
-            await Product.updateOne({key: key}, data)
+            await Product.updateOne({_id: id}, data)
             res.json({message: "Product updated successfully"})
             return
         }else{
             res.status(403).json({message: "Access denied. Admins only can update products."})
+            return
         }
     }catch(error){
         res.status(500).json({message: "Failed to update product"})
-
     }
+}
 
-
+export async function deleteProduct(req, res) {
+    let isAdmin = isItAdmin(req)
+    
+    try{
+        if(isAdmin){
+            const {id} = req.params
+            await Product.deleteOne({_id: id})
+            res.json({message: "Product deleted successfully"})
+        }
+    }catch(error){
+        res.status(500).json({message: "Failed to delete product"})
+    }
 }

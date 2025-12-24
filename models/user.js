@@ -20,8 +20,8 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type: String,
-        required: true,
-        default: "customer"
+        enum: ["customer", "admin"],
+        default: ""
     },
     address: {
         street: String,
@@ -42,7 +42,11 @@ const userSchema = new mongoose.Schema({
         // required: true,
         default: "https://www.vecteezy.com/free-vector/default-profile-picture"
     }
-})
+    //optional fields for future use
+    // savedDesigns: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Design' }]},
+    //                {timestamps: true
+
+},{timestamps: true})
 
 const User = mongoose.model('users', userSchema)
 

@@ -1,8 +1,13 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
+
 import userRouter from './routes/userRouter.js'
 import productRouter from './routes/productRouter.js'
+import cartRouter from './routes/cartRouter.js'
+import orderRouter from './routes/orderRouter.js'
+import stickerRouter from './routes/stickerRouter.js'
+
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
@@ -43,11 +48,12 @@ connection.once('open', ()=>{
 
 app.use('/api/users', userRouter)
 app.use('/api/products', productRouter)
+app.use('/api/carts', cartRouter)
+app.use('/api/orders', orderRouter)
+app.use('/api/stickers', stickerRouter)
 
 
 app.listen(3001,()=>{
     console.log("Server started on port 3001");
 })
 
-//john.doee@example.com StrongPassword123 user
-//john.doeee@example.com StrongPassword1234 admin
